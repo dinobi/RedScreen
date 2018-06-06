@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'red_screen'
+puts RedScreen.greeting(ARGV[0])
