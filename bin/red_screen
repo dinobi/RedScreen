@@ -1,4 +1,13 @@
 #!/usr/bin/env ruby
 
+#
+# Copyright (c) 2018 Dinobi Kenkwo
+#
+
 require 'red_screen'
+puts 'The RedScreen greeting was called'
 puts RedScreen.greeting(ARGV[0])
+puts '---------------'
+
+puts 'The Rack Application class was called directly using its namespace'
+puts RedScreen::Application.new.call({})
