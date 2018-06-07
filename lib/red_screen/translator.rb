@@ -1,5 +1,5 @@
 # translator class file
-class Translator
+class RedScreen::Translator
   attr_accessor :language
   def initialize(language)
     @language = language.nil? ? '' : language.downcase

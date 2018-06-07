@@ -1,5 +1,3 @@
-require 'red_screen/translator'
-
 # expose top level RedScreen.greeting API
 module RedScreen
   def self.greeting(language = 'English')
@@ -7,4 +5,6 @@ module RedScreen
     translator.greeting
   end
 end
+
+require 'red_screen/translator'
 

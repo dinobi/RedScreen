@@ -1,8 +1,9 @@
-RSpec.describe Translator do
 
-  let!(:others) { Translator.new('') }
-  let!(:swahili_trans) { Translator.new('swahili') }
-  let!(:spanish_trans) { Translator.new('spanish') }
+RSpec.describe RedScreen::Translator do
+
+  let!(:others) { RedScreen::Translator.new('') }
+  let!(:swahili_trans) { RedScreen::Translator.new('swahili') }
+  let!(:spanish_trans) { RedScreen::Translator.new('spanish') }
 
   describe 'Greeting' do
 
@@ -25,7 +26,7 @@ RSpec.describe Translator do
     end
 
     it "is case insensitive to all languages" do
-      all_caps_language = Translator.new('CHINESE')
+      all_caps_language = RedScreen::Translator.new('CHINESE')
       expect(all_caps_language.language).to eql 'chinese'
     end
   end
