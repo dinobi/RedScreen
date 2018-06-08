@@ -11,6 +11,7 @@ Gem::Specification.new do |gspec|
     lib/red_screen.rb
     lib/red_screen/translator.rb
     lib/red_screen/application.rb
+    lib/red_screen/base_controller.rb
     spec/red_screen_spec.rb
   ]
   gspec.homepage = 'http://rubygems.org/gems/red_screen'
@@ -19,4 +20,6 @@ Gem::Specification.new do |gspec|
   gspec.add_development_dependency 'rspec'
   gspec.add_development_dependency 'rake'
   gspec.add_development_dependency 'rdoc'
+  gspec.add_runtime_dependency 'erubis'
+  gspec.add_runtime_dependency 'rack'
 end
