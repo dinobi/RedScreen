@@ -1,3 +1,8 @@
+# coding: utf-8
+
+lib = File.expand_path('/lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 Gem::Specification.new do |gspec|
   gspec.name = 'red_screen'
   gspec.version = '0.0.1'
@@ -7,19 +12,15 @@ Gem::Specification.new do |gspec|
   gspec.description = %q{A mini implementation of the 'rails MVC framework'}
   gspec.authors = ['Dinobi']
   gspec.email = 'dinobi.kenkwo@andela.com'
-  gspec.files = %w[
-    lib/red_screen.rb
-    lib/red_screen/translator.rb
-    lib/red_screen/application.rb
-    lib/red_screen/base_controller.rb
-    spec/red_screen_spec.rb
-  ]
+  gspec.files = `git ls-files`.split($/)
   gspec.homepage = 'http://rubygems.org/gems/red_screen'
   gspec.license = 'MIT'
   gspec.require_paths = ['lib']
+
   gspec.add_development_dependency 'rspec'
   gspec.add_development_dependency 'rake'
   gspec.add_development_dependency 'rdoc'
-  gspec.add_runtime_dependency 'erubis'
+
+  gspec.add_runtime_dependency 'tilt'
   gspec.add_runtime_dependency 'rack'
 end

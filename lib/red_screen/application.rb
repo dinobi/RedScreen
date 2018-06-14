@@ -11,6 +11,14 @@ class RedScreen::Application
       return [200, {"Content-Type" => "text/html"}, ['Welcome to RedScreen']]
     end
 
+    if env['PATH_INFO'] == "/home"
+      return [302, {"Location" => "/"}, ['Welcome to RedScreen']]
+    end
+
+    if env['PATH_INFO'] == "/favicon.ico"
+      return [500, {}, []]
+    end
+
     response env
   end
 
@@ -28,12 +36,20 @@ class RedScreen::Application
     # This expression evaluates to an array of two elements (A class constant, and a string)
     # that will be assigned respectively
     #
-    controller_class, action = get_controller_and_action env
+    controller_class, action = get_controller_and_action(env)
 
     # Here I create an instance of the controller class and send the action as message
+
     response_body = controller_class.new.send(action)
 
-    [200, {"Content-Type" => "text/html"}, response_body]
+    # Render view by the action method name if render function
+    # was never called at the end of an action method definition.
+    # Find the view to render using the action method name
+    if response_body.nil? || response_body[1] != :render_called
+      response_body = controller_class.new.render(action, response_body)
+    end
+
+    [200, {"Content-Type" => "text/html"}, response_body[0]]
 
   end
 
@@ -49,8 +65,11 @@ class RedScreen::Application
     #
     _, controller_name, action = env['PATH_INFO'].split('/')
 
-    # I will create a the controller name
-    controller_name = controller_name.capitalize + 'Controller'
+    # default action to the 'index action' if action is nil or empty string
+    action = 'index' if action.nil? || action == ''
+
+    # create the controller name constant
+    controller_name = controller_name.to_camel_case + 'Controller'
     [Object.const_get(controller_name), action]
   end
 
