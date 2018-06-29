@@ -7,7 +7,6 @@
 require 'red_screen'
 puts 'The RedScreen greeting was called'
 puts RedScreen.greeting(ARGV[0])
-puts '---------------'
 
 puts 'The Rack Application class was called directly using its namespace'
-puts RedScreen::Application.new.call({})
+puts RedScreen::Application.new.call({PATH_INFO: '/'})
